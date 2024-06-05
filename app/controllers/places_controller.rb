@@ -1,13 +1,19 @@
 class PlacesController < ApplicationController
 
   def index
-    @places = Place.where({ "user_id" => @current_user["id"] })
+    if @current_user
+      @places = Place.where({ "user_id" => @current_user["id"] })
+    else
+      redirect_to "/login"
+    end
   end
 
   def show
     if @current_user
       @place = Place.find_by({ "id" => params["id"] })
       @entries = Entry.where({ "place_id" => @place["id"], "user_id" => @current_user["id"]  })
+      Rails.logger.info "-----------------"
+      Rails.logger.info @entries.count
     else
       redirect_to "/session/new"
     end
