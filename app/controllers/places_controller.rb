@@ -7,7 +7,7 @@ class PlacesController < ApplicationController
   def show
     if @current_user
       @place = Place.find_by({ "id" => params["id"] })
-      @entries = Post.where({ "place_id" => @place["id"], "user_id" => @current_user["id"]  })
+      @entries = Entry.where({ "place_id" => @place["id"], "user_id" => @current_user["id"]  })
     else
       redirect_to "/session/new"
     end

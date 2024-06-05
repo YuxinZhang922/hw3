@@ -1,6 +1,8 @@
 class EntriesController < ApplicationController
 
   def new
+    @entry = Post.new
+    @entry.place_id = params["place_id"]
   end
 
   def create
