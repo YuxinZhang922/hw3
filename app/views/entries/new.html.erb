@@ -1,22 +1,47 @@
-<h1>New Entry</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<form action="/entries" method="post">
-  <input type="hidden" name="place_id" value="<%= params["place_id"] %>">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <title>Tacostagram</title>
+</head>
 
-  <p>
-    <label for="title_input">Title</label>
-    <input type="text" name="title" id="title_input">
-  </p>
+<body class="container">
+  
+  <div class="row"> 
+    <div class="col-12 pb-4">  
+      <h1>New Entry</h1>
+    </div>  
+  </div>
 
-  <p>
-    <label for="description_input">Description</label>
-    <input type="text" name="description" id="description_input">
-  </p>
+  <div class="row"> 
+    <div class="col-12 pb-4"> 
+      <%= form_with :model => @entry do |form| %>
+        <%= form.hidden_field "place_id" %>
+        <p>
+          <%= form.label "title" %>
+          <%= form.text_field "title" %>
+        </p>
+        <p>
+          <%= form.label "description" %>
+          <%= form.text_field "description" %>
+        </p>
+        <p>
+          <%= form.label "occurred_on" %>
+          <%= form.date_field "occurred_on" %>
+        </p>
+        <p>
+            <%= form.label "uploaded_image", :class => "form-label" %>
+            <%= form.file_field "uploaded_image", :accept => "image/png,image/jpg,image/jpeg,image/gif", :class => "form-control" %>
+        </p>
+    </div>  
+  </div>
+  
+        <%= form.submit "Create Entry", :class => "btn btn-warning" %>          
+      <% end %>
 
-  <p>
-    <label for="occurred_on_input">Occurred On</label>
-    <input type="date" name="occurred_on" id="occurred_on_input">
-  </p>
-
-  <button>Save</button>
-</form>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>
